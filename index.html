@@ -12,31 +12,45 @@
             --glow-color: rgba(255, 255, 255, 0.8);
         }
 
-        body, html {
+        html {
+            background-color: var(--bg-color);
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
             margin: 0;
             padding: 0;
             height: 100%;
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: var(--bg-color);
             color: var(--text-color);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            text-transform: lowercase; /* Forces all text to lowercase */
-            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color); /* Adds the glow effect */
+            text-transform: lowercase; 
+            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+            /* Adds the subtle, continuous sway */
+            animation: sway 12s ease-in-out infinite;
+            transform-origin: center center;
+        }
+
+        /* Swaying Keyframes */
+        @keyframes sway {
+            0%, 100% { transform: rotate(-1deg) translate(-5px, -3px); }
+            50% { transform: rotate(1deg) translate(5px, 3px); }
         }
 
         /* Overlay for Autoplay Policy Workaround */
         #enter-screen {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-color);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 100;
             transition: opacity 0.8s ease;
+            background-color: var(--bg-color); /* Kept to hide visualizer before entry */
         }
 
         .enter-btn {
@@ -44,20 +58,21 @@
             border: 2px solid var(--text-color);
             color: var(--text-color);
             padding: 15px 40px;
+            margin: 20px; 
             font-size: 1.2rem;
             letter-spacing: 2px;
             text-transform: lowercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-shadow: inherit; /* Inherits the glow from body */
-            box-shadow: 0 0 10px var(--glow-color); /* Adds a glow to the button border */
+            text-shadow: inherit; 
+            box-shadow: 0 0 10px var(--glow-color); 
         }
 
         .enter-btn:hover {
             background: var(--text-color);
             color: var(--bg-color);
-            text-shadow: none; /* Removes text glow when inverted for better readability */
-            box-shadow: 0 0 20px var(--glow-color); /* Enhances border glow on hover */
+            text-shadow: none; 
+            box-shadow: 0 0 25px var(--glow-color); 
         }
 
         /* Main Content */
@@ -65,31 +80,45 @@
             text-align: center;
             opacity: 0;
             transition: opacity 1.5s ease;
+            padding: 30px; 
         }
 
         h1 {
             font-size: 4rem;
             font-weight: 200;
             letter-spacing: 15px;
-            margin: 0 0 10px 0;
-            margin-right: -15px; /* Offset for letter spacing */
+            margin: 0;
+            margin-right: -15px; 
+            padding: 20px 0; 
+            line-height: 1.1;
             text-transform: lowercase;
-            text-shadow: 0 0 15px var(--glow-color), 0 0 30px var(--glow-color); /* Slightly stronger glow for the title */
+            text-shadow: 0 0 15px var(--glow-color), 0 0 30px var(--glow-color);
         }
 
         p.subtitle {
             font-size: 1rem;
             letter-spacing: 5px;
             color: var(--accent-color);
-            margin-bottom: 40px;
+            margin: 0 0 40px 0;
+            padding: 10px 0; 
             text-transform: lowercase;
-            text-shadow: 0 0 8px rgba(85, 85, 85, 0.8); /* Darker glow for the accent color */
+            text-shadow: 0 0 8px rgba(85, 85, 85, 0.8);
+        }
+
+        .links {
+            padding: 20px; 
+        }
+
+        .links p {
+            padding: 10px 0;
         }
 
         .links a {
             color: var(--text-color);
             text-decoration: none;
             margin: 0 15px;
+            padding: 10px; 
+            display: inline-block; 
             font-size: 0.9rem;
             letter-spacing: 2px;
             transition: all 0.3s ease;
@@ -98,17 +127,18 @@
 
         .links a:hover {
             color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(85, 85, 85, 0.8); /* Changes glow color on hover */
+            text-shadow: 0 0 10px rgba(85, 85, 85, 0.8);
         }
 
-        /* Visualizer Animation (Optional aesthetic) */
+        /* Visualizer Animation */
         .visualizer {
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            height: 40px;
+            height: 50px; 
             gap: 5px;
-            margin-top: 50px;
+            margin-top: 40px;
+            padding: 10px;
         }
 
         .bar {
@@ -116,7 +146,7 @@
             background-color: var(--text-color);
             height: 5px;
             animation: bounce 1.5s infinite ease-in-out;
-            box-shadow: 0 0 8px var(--glow-color); /* Adds glow to the visualizer bars */
+            box-shadow: 0 0 8px var(--glow-color);
         }
 
         .bar:nth-child(2) { animation-delay: 0.2s; }
@@ -128,7 +158,6 @@
             50% { height: 35px; }
         }
 
-        /* Hide audio player */
         audio {
             display: none;
         }
@@ -136,12 +165,10 @@
 </head>
 <body>
 
-    <!-- Enter Screen -->
     <div id="enter-screen">
         <button class="enter-btn" onclick="enterSite()">click to enter</button>
     </div>
 
-    <!-- Main Site -->
     <div class="container" id="main-content">
         <h1>wonder</h1>
         <p class="subtitle">i make beats n shit</p>
@@ -151,6 +178,8 @@
             <a href="https://open.spotify.com/track/1gMhJdd5NNpZaam9uBjcPq">leyla</a>
             <a href="https://open.spotify.com/track/5rfcPRTqp12TlbPTCIJX5N">what about me</a>
             <p>thats all for now (please use my beats)</p>
+            <p>dm me on discord if you want a beat</p>
+            <p> my user is that.wonder</p>
         </div>
 
         <div class="visualizer">
@@ -162,8 +191,6 @@
         </div>
     </div>
 
-    <!-- Background Audio -->
-    <!-- Replace "beat.mp3" with the actual name of your audio file -->
     <audio id="bg-audio" loop>
         <source src="beat.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -171,22 +198,18 @@
 
     <script>
         function enterSite() {
-            // Hide enter screen
             const enterScreen = document.getElementById('enter-screen');
             enterScreen.style.opacity = '0';
             
-            // Show main content
             const mainContent = document.getElementById('main-content');
             mainContent.style.opacity = '1';
             
-            // Play audio
             const audio = document.getElementById('bg-audio');
-            audio.volume = 0.5; // Set volume to 50%
+            audio.volume = 0.5; 
             audio.play().catch(error => {
                 console.log("Audio playback was prevented by the browser.");
             });
 
-            // Remove enter screen from DOM after transition
             setTimeout(() => {
                 enterScreen.style.display = 'none';
             }, 800);
